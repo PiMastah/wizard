@@ -15,13 +15,13 @@
 
 ### Game
 * Number of players p
-  * Round (number n = 1..60/p)
-    0. Deal cards (n per player)
+  * Round (number of rounds r = 1..60/p)
+    0. Deal cards (r per player)
       * Determine trump suit
     1. Bid (player's bid b)
-    2. Play (n times)
+    2. Play (r times)
       * Tricks
-        1. Play card (each player)
+        1. Play card (each player in turn)
         2. Take
     3. Points
       * if actual takes = b : 20 + 10b Points
@@ -29,10 +29,10 @@
 
 ### Deck
 * 4 suits
-  * Humans (blue)
-  * Dwarves (red)
-  * Elves (green)
-  * Giants (yellow)
+  * Clubs
+  * Diamonds
+  * Hearts
+  * Spades
 * Ranks
   * 1..13
 * 8 special cards (no suit)
@@ -44,7 +44,22 @@
   * If played wizards > 0, first played wizard takes
 2. Trump suit
   * If played trumps > 0, highest trump takes
-3. First played suit
-  * If first played suit > 0, highest first played suit takes
+3. Followed suit
+  * If followed suit > 0, highest followed suit takes
 4. Jester
   * If played non-jesters = 0, first played jester takes
+
+## Programmatical Mechanic
+
+### Ranks
+  * Wizard = Rank 14
+  * full french deck = Rank 1..13 accordingly
+  * Jester = Rank 0
+
+### Suits
+  * Wizard = Rank 4
+  * Trump suit = Rank 3
+  * Followed suit = Rank 2
+  * Non trump && non followed suits = Rank 1
+  * Jester = Rank 0
+  
