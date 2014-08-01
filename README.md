@@ -49,17 +49,16 @@
 4. Jester
   * If played non-jesters = 0, first played jester takes
 
-## Programmatical Mechanic
+## Programmatical Mechanics Trick Taking
 
-### Ranks
-  * Wizard = Rank 14
-  * full french deck = Rank 1..13 accordingly
-  * Jester = Rank 0
+Ranking highest to lowest when taking trick:
 
 ### Suits
-  * Wizard = Rank 4
-  * Trump suit = Rank 3
-  * Followed suit = Rank 2
-  * Non trump && non followed suits = Rank 1
-  * Jester = Rank 0
+  * Wizard
+  * Trump suit
+  * Followed suit
+  * Non trump && non followed suits
+  * Jester
   
+### Ranks
+  * full french deck = Rank 13..1 accordingly
