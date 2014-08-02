@@ -14,7 +14,7 @@ describe("Dealer", function () {
 	});
 
 	it("returns the shuffled deck", function () {
-		var oldDeck = this.deck
+		var oldDeck = this.deck;
 		var newDeck = dealer.shuffle(this.deck);
 
 		expect(newDeck.length).toBe(oldDeck.length);
