@@ -4,7 +4,7 @@ var expect = buster.expect;
 
 buster.spec.expose();
 
-var deckFactory = require('../../../src/deck');
+var deckFactory = require('../../src/deck');
 
 var suits = ['clubs', 'diamonds', 'hearts', 'spades']
 ,	ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]

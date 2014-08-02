@@ -4,9 +4,9 @@ var expect = buster.expect;
 
 buster.spec.expose();
 
-var deckFactory = require('../../../src/deck');
-var cardFactory = require('../../../src/card');
-var cardRanker  = require('../../../src/cardRanker').create();
+var deckFactory = require('../../src/deck');
+var cardFactory = require('../../src/card');
+var cardRanker  = require('../../src/cardRanker').create();
 
 describe("Card comparison:", function () {
 	var self = this;
