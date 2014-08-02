@@ -1,7 +1,6 @@
 var buster = require("buster");
 var assert = buster.referee.assert;
 var expect = buster.expect;
-var when = require('when');
 
 buster.spec.expose();
 
@@ -22,12 +21,12 @@ describe("Player", function () {
 
     it("can choose a card to play", function (done) {
         var hand = [cardFactory.create('wizards')];
+        var self = this;
 
         this.player.playCard(hand).then(function (index) {
             expect(hand[index]).toBeDefined();
             done();
         });
-        var self = this;
         setTimeout(function () {
             self.player.emit('pick', 0);
         }, 100);
