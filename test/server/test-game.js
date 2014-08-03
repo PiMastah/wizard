@@ -18,11 +18,11 @@ describe("Game", function () {
     it("has a unique id", function () {
         var otherGame = gameFactory.create();
 
-        expect(self.game.id === otherGame.id).toBe(false);
+        expect(otherGame.id).not.toEqual(self.game.id);
 
     });
 
     it("has players", function () {
-        expect(self.game.players && self.game.players.length).toBeGreaterThan(-1);
+        expect(self.game.players).toBeArray();
     });
 });

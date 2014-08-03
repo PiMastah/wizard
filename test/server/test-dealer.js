@@ -22,7 +22,7 @@ describe("Dealer", function () {
 		oldDeck.cards.forEach(function (card) {
 			expect(newDeck.cards.some(function (newCard) {
 				return (card.suit === newCard.suit && card.rank === newCard.rank);
-			})).toBe(true);
+			})).toBeTrue();
 		});
 	});
 });

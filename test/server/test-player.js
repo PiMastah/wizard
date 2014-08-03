@@ -16,14 +16,30 @@ describe("Player", function () {
     });
 
     it("has a name", function () {
-        expect(this.player.name).toBe(this.name);
+        expect(self.player.name).toBe(self.name);
+    });
+
+    it("has a unique id", function () {
+        newPlayer = playerFactory.create();
+        expect(newPlayer.id).not.toEqual(self.player.id);
+    });
+
+    it("can bid", function (done) {
+        var hand = [cardFactory.create('wizards')];
+
+        self.player.bid(hand).then(function (bid) {
+            expect(bid).toBeLessThan(hand.length+1);
+            done()
+        });
+        setTimeout(function () {
+            self.player.emit('bid', 1);
+        }, 100);
     });
 
     it("can choose a card to play", function (done) {
         var hand = [cardFactory.create('wizards')];
-        var self = this;
 
-        this.player.playCard(hand).then(function (index) {
+        self.player.playCard(hand).then(function (index) {
             expect(hand[index]).toBeDefined();
             done();
         });
