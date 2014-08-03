@@ -36,11 +36,11 @@ describe("Player", function () {
         }, 100);
     });
 
-    it("can choose a card to play", function (done) {
+    it("can choose a card to run", function (done) {
         var hand = [cardFactory.create('wizards')];
 
-        self.player.playCard(hand).then(function (index) {
-            expect(hand[index]).toBeDefined();
+        self.player.playCard(hand).then(function (card) {
+            expect(hand.indexOf(card)).toBeGreaterThan(-1);
             done();
         });
         setTimeout(function () {

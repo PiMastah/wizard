@@ -51,14 +51,14 @@ ComparisonPolicy.prototype.setTrumpSuit = function (suit) {
 };
 
 ComparisonPolicy.prototype.compare = function (trick) {
-    var highest;
+    var indexHighest;
     var self = this;
-    trick.forEach(function (card) {
-        if (!highest) {
-            highest = card;
+    trick.forEach(function (card, index) {
+        if (!indexHighest) {
+            indexHighest = index;
         } else {
-            highest = self.rank(highest, card);
+            indexHighest = self.rank(trick[indexHighest], card);
         }
     });
-    return highest;
+    return indexHighest;
 };
