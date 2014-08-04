@@ -74,6 +74,7 @@ RoundPolicy.prototype.run = function () {
         var promise = trickPolicy.run();
         promise.then(function (winnerIndex) {
             self.roundState.playerTrickCounts[winnerIndex]++;
+            self.roundState.startingPlayerIndex = winnerIndex;
         });
         return promise
     };

@@ -16,8 +16,7 @@ describe("A Game", function () {
     });
 
     it("has a unique id", function () {
-        var otherGame = gameFactory.create();
-
+        var otherGame = gameFactory.create([playerFactory.create('Bar')]);
         expect(otherGame.id).not.toEqual(self.game.id);
 
     });
@@ -25,4 +24,8 @@ describe("A Game", function () {
     it("has players", function () {
         expect(self.game.players).toBeArray();
     });
+
+    it("starts", function () {
+      expect(self.game.start()).toBeDefined();
+    })
 });
