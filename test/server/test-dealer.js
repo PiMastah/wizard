@@ -30,7 +30,7 @@ describe("A Dealer", function () {
         var deck = deckFactory.create();
         var numberOfPlayers = 5;
         var sizeOfHands = 2;
-        var hands = dealer.deal(numberOfPlayers, sizeOfHands, deck.cards);
+        var hands = dealer.deal(numberOfPlayers, sizeOfHands, deck);
 
         expect(hands).toBeArray();
         expect(hands.length).toBe(numberOfPlayers);

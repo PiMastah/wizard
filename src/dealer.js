@@ -31,8 +31,8 @@ Dealer.prototype.deal = function (numberOfPlayers, sizeOfHands, deck) {
     for (var x = 0; x < sizeOfHands; x++) {
         for (var i = 0; i < numberOfPlayers; i++) {
             var hand = hands[i] || [];
-            var card = deck[0];
-            deck.splice(0, 1);
+            var card = deck.cards[0];
+            deck.cards.splice(0, 1);
             hand.push(card);
             hands[i] = hand;
         }
