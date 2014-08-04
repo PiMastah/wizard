@@ -50,14 +50,13 @@ RoundPolicy.prototype.runBidding = function () {
 };
 
 RoundPolicy.prototype.calculatePoints = function () {
-    var points = [];
     var self = this;
-    this.roundState.bids.map(function (bid, index) {
+    var points = this.roundState.bids.map(function (bid, index) {
         var tricksTaken = self.roundState.playerTrickCounts[index];
         if (bid === tricksTaken) {
-            points.push((bid*10) + 20);
+            return ((bid*10) + 20);
         } else {
-            points.push(-(Math.abs(bid-tricksTaken) * 10));
+            return (-(Math.abs(bid-tricksTaken) * 10));
         }
     });
     return points;

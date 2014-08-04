@@ -30,14 +30,8 @@ Dealer.prototype.shuffle = function(deck) {
 
 Dealer.prototype.deal = function (numberOfPlayers, sizeOfHands, deck) {
     var hands = [];
-    for (var x = 0; x < sizeOfHands; x++) {
-        for (var i = 0; i < numberOfPlayers; i++) {
-            var hand = hands[i] || [];
-            var card = deck.cards[0];
-            deck.cards.splice(0, 1);
-            hand.push(card);
-            hands[i] = hand;
-        }
+    for (var i = 0; i < numberOfPlayers; i++) {
+        hands.push(deck.cards.splice(0, sizeOfHands));
     }
     return hands;
 };
