@@ -57,7 +57,9 @@ ComparisonPolicy.prototype.compare = function (trick) {
         if (!indexHighest) {
             indexHighest = index;
         } else {
-            indexHighest = self.rank(trick[indexHighest], card);
+            if (card === self.rank(trick[indexHighest], card)) {
+                indexHighest = index;
+            }
         }
     });
     return indexHighest;

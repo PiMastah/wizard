@@ -36,7 +36,6 @@ TrickPolicy.prototype.run = function () {
 
     sequence(tasks).then(function (playedCards) {
         var winnerIndex = comparisonPolicy.compare(playedCards);
-        console.log(winnerIndex);
         self.roundState.playerTrickCounts[winnerIndex]++;
         deferred.resolve(winnerIndex);
     });

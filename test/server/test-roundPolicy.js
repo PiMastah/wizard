@@ -5,27 +5,38 @@ var expect = buster.expect;
 buster.spec.expose();
 
 var roundPolicyFactory = require('../../src/roundPolicy');
-var roundStateFactory = require('../../src/roundState');
 var playerFactory = require('../../src/player');
 
 describe("The round policy", function () {
     var self = this;
     buster.spec.before(function () {
-
+        self.foo = playerFactory.create('Foo');
+        self.bar = playerFactory.create('Bar');
+        self.baz = playerFactory.create('Baz');
+        self.players = [self.foo, self.bar, self.baz];
+        self.roundNumber = 1;
+        self.roundPolicy = roundPolicyFactory.create(self.players, self.roundNumber);
+        self.roundState = self.roundPolicy.roundState;
     });
     it("initialize a round with round number", function () {
-        var foo = playerFactory.create('Foo');
-        var bar = playerFactory.create('Bar');
-        var baz = playerFactory.create('Baz');
-        var players = [foo, bar, baz];
-        var roundNumber = 1;
-        var roundPolicy = roundPolicyFactory.create(players, roundNumber);
-        var roundState = roundPolicy.roundState;
-        
-        expect(roundState).toBeDefined();
-        expect(roundState.roundNumber).toBe(roundNumber);
-        expect(roundState.players).toBe(players);
-        expect(roundState.hands).toBeDefined();
-        expect(roundState.trumpSuit).toBeDefined();
+        expect(self.roundState).toBeDefined();
+        expect(self.roundState.roundNumber).toBe(self.roundNumber);
+        expect(self.roundState.players).toBe(self.players);
+        expect(self.roundState.hands).toBeDefined();
+        expect(self.roundState.trumpSuit).toBeDefined();
+    });
+
+    it("starts a bidding round", function (done) {
+        var expectedBids = [1, 1, 1];
+        self.roundPolicy.runBidding().then(function (bids) {
+            expect(bids).toBeArrayLike(expectedBids);
+            done();
+        });
+
+        self.players.forEach(function (player, index) {
+            setTimeout(function () {
+                player.emit('bid', 1);
+            }, index * 20);
+        });
     });
 });

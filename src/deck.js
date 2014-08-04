@@ -22,9 +22,9 @@ var Deck = function () {
 
 	for (var i = 0; i < 4; i++) {
 		this.cards.push(cardFactory.create('wizards'));
-	};
+	}
 
-	for (var i = 0; i < 4; i++) {
+	for (i = 0; i < 4; i++) {
 		this.cards.push(cardFactory.create('jesters'));
-	};
+	}
 };

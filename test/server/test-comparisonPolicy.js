@@ -90,6 +90,6 @@ describe("Card comparison: ", function () {
     it("compares at least 3 cards", function () {
         var trick = [self.otherSuit, self.jester, self.wizard];
 
-        expect(comparisonPolicy.compare(trick)).toBe(self.wizard);
+        expect(comparisonPolicy.compare(trick)).toBe(2);
     });
 });

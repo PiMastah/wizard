@@ -19,3 +19,32 @@ var RoundPolicy = function (players, roundNumber) {
 
     return this;
 };
+
+RoundPolicy.prototype.runBidding = function () {
+    var self = this;
+    var currentPlayerIndex = 0;
+    var deferred = when.defer();
+    var bids = [];
+
+    var nextPlayer = function () {
+        var hand = self.roundState.hands[currentPlayerIndex];
+
+        var promise = self.roundState.players[currentPlayerIndex].bid(hand);
+
+        promise.then(function (bid) {
+            currentPlayerIndex++;
+            bids.push(bid);
+        });
+        return promise;
+    };
+
+    var tasks = this.roundState.players.map(function () {
+        return nextPlayer;
+    });
+    sequence(tasks).then(function () {
+        self.roundState.bids = bids;
+        deferred.resolve(bids);
+    });
+
+    return deferred.promise;
+};
