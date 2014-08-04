@@ -40,4 +40,13 @@ describe("The round policy", function () {
             }, index * 20);
         });
     });
+
+    it("calculates points for players", function () {
+        self.roundState.playerTrickCounts = [1, 0, 0];
+        self.roundState.bids = [1, 1, 0];
+        var expectedPoints = [30, -10, 20];
+
+        var points = self.roundPolicy.calculatePoints();
+        expect(points).toBeArrayLike(expectedPoints);
+    });
 });

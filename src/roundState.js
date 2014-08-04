@@ -13,7 +13,7 @@ var RoundState = function (roundNumber, players, hands, trumpSuit) {
         return 0;
     });
     this.startingPlayerIndex = 0;
-    this.bids = [];
+    this.bids = [0, 0, 0];
 
     return this;
 };
