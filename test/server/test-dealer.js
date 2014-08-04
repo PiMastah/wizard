@@ -7,7 +7,7 @@ buster.spec.expose();
 var dealer = require('../../src/dealer').create();
 var deckFactory = require('../../src/deck');
 
-describe("Dealer", function () {
+describe("A Dealer", function () {
 	var self = this;
 	buster.spec.before(function () {
 		self.deck = deckFactory.create();
@@ -25,4 +25,22 @@ describe("Dealer", function () {
 			})).toBeTrue();
 		});
 	});
+
+    it("deals Hands to players", function () {
+        var deck = deckFactory.create();
+        var numberOfPlayers = 5;
+        var sizeOfHands = 2;
+        var hands = dealer.deal(numberOfPlayers, sizeOfHands, deck.cards);
+
+        expect(hands).toBeArray();
+        expect(hands.length).toBe(numberOfPlayers);
+        var dealtCards = [];
+        hands.map(function (hand) {
+            hand.map(function (card) {
+                expect(dealtCards.indexOf(card)).toBe(-1);
+                dealtCards.push(card);
+            });
+        });
+
+    });
 });
