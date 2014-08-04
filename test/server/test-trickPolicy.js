@@ -37,7 +37,8 @@ describe("The trick policy", function () {
             0
         ];
 
-        self.roundState = roundState.create(1, self.players, self.hands, self.bids, '');
+        self.roundState = roundState.create(1, self.players, self.bids, '');
+        self.roundState['hands'] = self.hands;
         self.trick = trickPolicy.create(self.roundState);
     });
 

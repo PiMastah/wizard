@@ -4,19 +4,16 @@ var EventEmitter = require('events').EventEmitter;
 var dealer = require('./dealer').create();
 var deck = require('./deck');
 var roundStateFactory = require('./roundState');
+var trickPolicyFactory = require('./trickPolicy');
 
 module.exports = {
-    create: function (players, roundNumber) {
-        return new RoundPolicy(players, roundNumber);
+    create: function (players) {
+        return new RoundPolicy(players);
     }
 };
 
-var RoundPolicy = function (players, roundNumber) {
-    var shuffledDeck = dealer.shuffle(deck.create());
-    var hands = dealer.deal(players.length, roundNumber, shuffledDeck);
-    var trumpCard = shuffledDeck.cards[0];
-    this.roundState = roundStateFactory.create(roundNumber, players, hands, trumpCard.suit);
-
+var RoundPolicy = function (players) {
+    this.roundState = roundStateFactory.create(1, players);
     return this;
 };
 
@@ -60,4 +57,37 @@ RoundPolicy.prototype.calculatePoints = function () {
         }
     });
     return points;
+};
+
+RoundPolicy.prototype.initHands = function () {
+    var shuffledDeck = dealer.shuffle(deck.create());
+    this.roundState.hands = dealer.deal(this.roundState.players.length, this.roundState.roundNumber, shuffledDeck);
+    this.roundState.trumpSuit = shuffledDeck.cards[0].suit;
+};
+
+RoundPolicy.prototype.run = function () {
+    var self = this;
+    var deferred = when.defer();
+    var trickPolicy = trickPolicyFactory.create(this.roundState);
+
+    var runTrick = function () {
+        var promise = trickPolicy.run();
+        promise.then(function (winnerIndex) {
+            self.roundState.playerTrickCounts[winnerIndex]++;
+        });
+        return promise
+    };
+
+    var tasks = [];
+    for (var i = 0; i < this.roundState.roundNumber; i++) {
+        tasks.push(runTrick);
+    }
+
+    sequence(tasks).then(function () {
+        var points = self.calculatePoints();
+        self.roundState.roundNumber++;
+        deferred.resolve(points);
+    });
+
+    return deferred.promise;
 };

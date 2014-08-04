@@ -12,8 +12,6 @@ var comparisonPolicy = require('./comparisonPolicy').create();
 
 var TrickPolicy = function (roundState) {
     this.roundState = roundState;
-
-    return this;
 };
 
 TrickPolicy.prototype.run = function () {

@@ -19,7 +19,7 @@ require('util').inherits(Player, EventEmitter);
 
 Player.prototype.playCard = function (hand) {
     var deferred = when.defer();
-    this.on('pick', function (index) {
+    this.once('pick', function (index) {
         deferred.resolve(hand[index]);
     });
     return deferred.promise;

@@ -6,6 +6,7 @@ buster.spec.expose();
 
 var roundPolicyFactory = require('../../src/roundPolicy');
 var playerFactory = require('../../src/player');
+var cardFactory = require('../../src/card');
 
 describe("The round policy", function () {
     var self = this;
@@ -14,16 +15,19 @@ describe("The round policy", function () {
         self.bar = playerFactory.create('Bar');
         self.baz = playerFactory.create('Baz');
         self.players = [self.foo, self.bar, self.baz];
-        self.roundNumber = 1;
-        self.roundPolicy = roundPolicyFactory.create(self.players, self.roundNumber);
+        self.roundPolicy = roundPolicyFactory.create(self.players);
         self.roundState = self.roundPolicy.roundState;
     });
 
     it("initializes a round", function () {
         expect(self.roundState).toBeDefined();
-        expect(self.roundState.roundNumber).toBe(self.roundNumber);
+        expect(self.roundState.roundNumber).toBe(1);
         expect(self.roundState.players).toBe(self.players);
-        expect(self.roundState.hands).toBeDefined();
+    });
+
+    it("deals hands and defines a trump suit", function () {
+        self.roundPolicy.initHands();
+        expect(self.roundState.hands).toBeArray();
         expect(self.roundState.trumpSuit).toBeDefined();
     });
 
@@ -48,5 +52,30 @@ describe("The round policy", function () {
 
         var points = self.roundPolicy.calculatePoints();
         expect(points).toBeArrayLike(expectedPoints);
+    });
+
+    it("runs a round", function (done) {
+        self.roundState.hands = [
+            [cardFactory.create('wizards')],
+            [cardFactory.create('jesters')],
+            [cardFactory.create('hearts', 13)]
+        ];
+        var expectedPoints = [30, -10, 20];
+        self.roundState.bids = [1, 1, 0];
+
+        self.roundPolicy.run().then(function (points) {
+            expect(points).toBeArray();
+            expect(points).toBeArrayLike(expectedPoints);
+            expect(self.roundState.roundNumber).toBe(2);
+            done();
+        });
+
+        for (var i = 0; i < this.roundState.roundNumber; i++) {
+            self.roundState.players.map(function (player, index) {
+                setTimeout(function() {
+                    player.emit('pick', 0);
+                }, index * 10);
+            });
+        }
     });
 });

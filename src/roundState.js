@@ -4,16 +4,16 @@ module.exports = {
     }
 };
 
-var RoundState = function (roundNumber, players, hands, trumpSuit) {
+var RoundState = function (roundNumber, players) {
     this.roundNumber = roundNumber;
     this.players = players;
-    this.hands = hands;
-    this.trumpSuit = trumpSuit || '';
+    this.hands = [];
+    this.trumpSuit = '';
     this.playerTrickCounts = players.map(function () {
         return 0;
     });
     this.startingPlayerIndex = 0;
-    this.bids = [0, 0, 0];
+    this.bids = [];
 
     return this;
 };
