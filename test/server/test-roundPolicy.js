@@ -18,7 +18,8 @@ describe("The round policy", function () {
         self.roundPolicy = roundPolicyFactory.create(self.players, self.roundNumber);
         self.roundState = self.roundPolicy.roundState;
     });
-    it("initialize a round with round number", function () {
+
+    it("initializes a round", function () {
         expect(self.roundState).toBeDefined();
         expect(self.roundState.roundNumber).toBe(self.roundNumber);
         expect(self.roundState.players).toBe(self.players);

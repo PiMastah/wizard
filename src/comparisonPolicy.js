@@ -12,6 +12,7 @@ var ComparisonPolicy = function () {
 	var self = this;
     this.trumpSuit = '';
 
+    return this;
 };
 
 ComparisonPolicy.prototype.rank = function (card1, card2) {

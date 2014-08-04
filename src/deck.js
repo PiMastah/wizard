@@ -27,4 +27,6 @@ var Deck = function () {
 	for (i = 0; i < 4; i++) {
 		this.cards.push(cardFactory.create('jesters'));
 	}
+
+    return this;
 };

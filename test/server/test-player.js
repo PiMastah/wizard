@@ -7,7 +7,7 @@ buster.spec.expose();
 var playerFactory = require('../../src/player');
 var cardFactory = require('../../src/card');
 
-describe("Player", function () {
+describe("A Player", function () {
     var self = this;
     buster.spec.before(function () {
         this.timeout = 1000;

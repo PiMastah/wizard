@@ -11,6 +11,8 @@ module.exports = {
 var Player = function (name) {
     this.name = name;
     this.id = uuid.v4();
+
+    return this;
 };
 
 require('util').inherits(Player, EventEmitter);

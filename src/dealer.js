@@ -4,7 +4,9 @@ module.exports = {
 	}
 };
 
-var Dealer = function () {};
+var Dealer = function () {
+    return this;
+};
 
 function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;

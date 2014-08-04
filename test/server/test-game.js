@@ -7,7 +7,7 @@ buster.spec.expose();
 var playerFactory = require('../../src/player');
 var gameFactory = require('../../src/game');
 
-describe("Game", function () {
+describe("A Game", function () {
     var self = this;
     buster.spec.before(function () {
         self.players = [playerFactory.create('Foo')];

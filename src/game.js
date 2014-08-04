@@ -10,6 +10,7 @@ module.exports = {
 
 var Game = function (players) {
     this.id = uuid.v4();
-
     this.players = players;
+
+    return this;
 };

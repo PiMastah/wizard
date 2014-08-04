@@ -9,7 +9,7 @@ var roundState = require('../../src/roundState');
 var playerFactory = require('../../src/player');
 var cardFactory = require('../../src/card');
 
-describe("A Trick", function () {
+describe("The trick policy", function () {
     var self = this;
     buster.spec.before(function () {
         self.someCard = cardFactory.create("hearts", 7);
