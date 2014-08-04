@@ -23,11 +23,9 @@ TrickPolicy.prototype.run = function () {
         var hand = self.roundState.hands[currentPlayerIndex];
         var promise = self.roundState.players[currentPlayerIndex].playCard(hand);
 
-        promise.then(
-            function () {
-                currentPlayerIndex = (currentPlayerIndex + 1) % self.roundState.players.length;
-            }
-        );
+        promise.then(function () {
+            currentPlayerIndex = (currentPlayerIndex + 1) % self.roundState.players.length;
+        });
 
         return promise;
     };
