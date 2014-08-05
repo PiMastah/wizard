@@ -1,0 +1,25 @@
+{
+  "name": "wizard",
+  "version": "0.0.0",
+  "description": "a trick taking card game",
+  "main": "src/main.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "node-uuid": "^1.4.1",
+    "when": "^3.4.2"
+  },
+  "devDependencies": {
+      "buster": "^0.7.13"
+  },
+  "scripts": {
+    "test": "buster-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/PiMastah/wizard.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
