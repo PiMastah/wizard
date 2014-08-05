@@ -4,10 +4,10 @@ var expect = buster.expect;
 
 buster.spec.expose();
 
-var trickPolicy = require('../../src/trickPolicy');
-var roundState = require('../../src/roundState');
-var playerFactory = require('../../src/player');
-var cardFactory = require('../../src/card');
+var trickPolicy = require('../../src/server/trickPolicy');
+var roundState = require('../../src/server/roundState');
+var playerFactory = require('../../src/server/player');
+var cardFactory = require('../../src/server/card');
 
 describe("The trick policy", function () {
     var self = this;

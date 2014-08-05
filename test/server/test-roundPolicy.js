@@ -4,9 +4,9 @@ var expect = buster.expect;
 
 buster.spec.expose();
 
-var roundPolicyFactory = require('../../src/roundPolicy');
-var playerFactory = require('../../src/player');
-var cardFactory = require('../../src/card');
+var roundPolicyFactory = require('../../src/server/roundPolicy');
+var playerFactory = require('../../src/server/player');
+var cardFactory = require('../../src/server/card');
 
 describe("The round policy", function () {
     var self = this;

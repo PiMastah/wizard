@@ -4,8 +4,8 @@ var expect = buster.expect;
 
 buster.spec.expose();
 
-var dealer = require('../../src/dealer').create();
-var deckFactory = require('../../src/deck');
+var dealer = require('../../src/server/dealer').create();
+var deckFactory = require('../../src/server/deck');
 
 describe("A Dealer", function () {
 	var self = this;

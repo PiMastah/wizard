@@ -4,8 +4,8 @@ var expect = buster.expect;
 
 buster.spec.expose();
 
-var playerFactory = require('../../src/player');
-var gameFactory = require('../../src/game');
+var playerFactory = require('../../src/server/player');
+var gameFactory = require('../../src/server/game');
 
 describe("A Game", function () {
     var self = this;

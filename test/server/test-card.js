@@ -2,7 +2,7 @@ var buster = require("buster");
 var assert = buster.referee.assert;
 var expect = buster.expect;
 
-var cardFactory = require('../../src/card');
+var cardFactory = require('../../src/server/card');
 
 buster.spec.expose();
 
