@@ -1,6 +1,6 @@
 module.exports = {
-    create: function (roundNumber, players, hands, bids, trumpSuit) {
-        return new RoundState(roundNumber, players, hands, bids, trumpSuit);
+    create: function (roundNumber, players) {
+        return new RoundState(roundNumber, players);
     }
 };
 
