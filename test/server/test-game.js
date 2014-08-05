@@ -26,6 +26,6 @@ describe("A Game", function () {
     });
 
     it("starts", function () {
-      expect(self.game.start()).toBeDefined();
-    })
+        expect(self.game.start()).toBeDefined();
+    });
 });
