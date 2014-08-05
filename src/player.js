@@ -19,7 +19,7 @@ require('util').inherits(Player, EventEmitter);
 
 Player.prototype.playCard = function (hand) {
     var deferred = when.defer();
-    this.on('pick', function (index) {
+    this.once('pick', function (index) {
         deferred.resolve(hand[index]);
     });
     return deferred.promise;
@@ -27,7 +27,7 @@ Player.prototype.playCard = function (hand) {
 
 Player.prototype.bid = function (hand) {
     var deferred = when.defer();
-    this.on('bid', function (bid) {
+    this.once('bid', function (bid) {
         deferred.resolve(bid);
     });
     return deferred.promise;
