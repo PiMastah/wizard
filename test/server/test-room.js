@@ -35,4 +35,16 @@ describe("A Room", function () {
 
         expect(spy).toHaveBeenCalled();
     });
+
+    it("creates a game with players when full", function () {
+        self.aRoom.join(self.aPlayer);
+        self.aRoom.join(self.anotherPlayer);
+        self.aRoom.join(self.yetAnotherPlayer);
+
+        expect(self.aRoom.game.players).toBeArray();
+        expect(self.aRoom.game.players.length).toBe(3);
+        expect(self.aRoom.game.players).toContain(self.aPlayer);
+        expect(self.aRoom.game.players).toContain(self.anotherPlayer);
+        expect(self.aRoom.game.players).toContain(self.yetAnotherPlayer);
+    });
 });

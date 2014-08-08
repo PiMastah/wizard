@@ -23,6 +23,7 @@ Room.prototype.join = function (player) {
     this.players.push(player);
     if (this.players.length === this.capacity) {
         this.emit('full');
+        this.game = gameFactory.create(this.players);
     }
     return this;
 };
