@@ -1,4 +1,5 @@
 var EventEmitter = require('events').EventEmitter;
+var uuid = require('node-uuid');
 
 module.exports = {
     create: function () {
@@ -12,6 +13,7 @@ var playerFactory = require('./player');
 var Room = function () {
     this.accounts = [];
     this.capacity = 3;
+    this.id = uuid.v4();
     return this;
 };
 
