@@ -38,7 +38,7 @@ describe("A Room", function () {
         self.aRoom.join(self.anotherAccount);
         self.aRoom.join(self.yetAnotherAcount);
 
-        self.aRoom.startGame();
+        var hasStarted = self.aRoom.startGame();
 
         var expectedPlayers = [
             self.anAccount.players[0],
@@ -46,6 +46,8 @@ describe("A Room", function () {
             self.yetAnotherAcount.players[0]
         ];
 
+        expect(hasStarted).toBeTrue();
+        expect(self.aRoom.game).toBeDefined();
         expect(self.aRoom.game.players).toBeArray();
         expect(self.aRoom.game.players.length).toBe(3);
         self.aRoom.game.players.map(function (player) {
@@ -56,8 +58,9 @@ describe("A Room", function () {
     it("does not create a game when not full", function () {
         self.aRoom.join(self.anAccount);
 
-        self.aRoom.startGame();
+        var hasStarted = self.aRoom.startGame();
 
+        expect(hasStarted).not.toBeTrue();
         expect(self.aRoom.game).not.toBeDefined();
     });
 
