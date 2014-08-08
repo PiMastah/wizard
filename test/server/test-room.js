@@ -1,11 +1,8 @@
 var buster = require("buster");
-var assert = buster.referee.assert;
 var expect = buster.expect;
-var when = require('when');
 
 buster.spec.expose();
 
-var gameFactory = require('../../src/server/game');
 var accountFactory = require('../../src/server/account');
 var roomFactory = require('../../src/server/room');
 

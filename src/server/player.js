@@ -25,7 +25,7 @@ Player.prototype.playCard = function (hand) {
     return deferred.promise;
 };
 
-Player.prototype.bid = function (hand) {
+Player.prototype.bid = function () {
     var deferred = when.defer();
     this.once('bid', function (bid) {
         deferred.resolve(bid);

@@ -1,6 +1,3 @@
-var when = require('when');
-var sequence = require('when/sequence');
-var uuid = require('node-uuid');
 var EventEmitter = require('events').EventEmitter;
 
 module.exports = {

@@ -1,5 +1,4 @@
 var buster = require("buster");
-var assert = buster.referee.assert;
 var expect = buster.expect;
 
 buster.spec.expose();

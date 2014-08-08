@@ -1,6 +1,5 @@
 var when = require('when');
 var sequence = require('when/sequence');
-var EventEmitter = require('events').EventEmitter;
 
 module.exports = {
     create: function (roundState) {

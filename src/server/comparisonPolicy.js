@@ -1,15 +1,10 @@
-module.exports = {};
-
 module.exports = {
 	create: function () {
 		return new ComparisonPolicy();
 	}
 };
 
-var cardFactory = require('./card');
-
 var ComparisonPolicy = function () {
-	var self = this;
     this.trumpSuit = '';
 
     return this;

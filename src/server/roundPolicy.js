@@ -1,6 +1,5 @@
 var when = require('when');
 var sequence = require('when/sequence');
-var EventEmitter = require('events').EventEmitter;
 var dealer = require('./dealer').create();
 var deck = require('./deck');
 var roundStateFactory = require('./roundState');
