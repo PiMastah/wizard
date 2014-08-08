@@ -6,7 +6,7 @@ var when = require('when');
 buster.spec.expose();
 
 var gameFactory = require('../../src/server/game');
-var accountFactory = require('../../src/server/player');
+var accountFactory = require('../../src/server/account');
 var lobbyFactory = require('../../src/server/lobby');
 
 describe("A lobby", function () {

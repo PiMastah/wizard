@@ -6,57 +6,61 @@ var when = require('when');
 buster.spec.expose();
 
 var gameFactory = require('../../src/server/game');
-var playerFactory = require('../../src/server/player');
+var accountFactory = require('../../src/server/account');
 var roomFactory = require('../../src/server/room');
 
 describe("A Room", function () {
     var self = this;
     buster.spec.before(function () {
-        self.aPlayer = playerFactory.create('Jim');
-        self.anotherPlayer = playerFactory.create('John');
-        self.yetAnotherPlayer = playerFactory.create('Jack');
+        self.anAccount = accountFactory.create('Jim');
+        self.anotherAccount = accountFactory.create('John');
+        self.yetAnotherAcount = accountFactory.create('Jack');
         self.aRoom = roomFactory.create();
     });
 
     it("allows accounts to join and leave", function () {
-        self.aRoom.join(self.aPlayer);
-        expect(self.aRoom.players).toContain(self.aPlayer);
-        self.aRoom.leave(self.aPlayer);
-        expect(self.aRoom.players).not.toContain(self.aPlayer);
+        self.aRoom.join(self.anAccount);
+        expect(self.aRoom.accounts).toContain(self.anAccount);
+        self.aRoom.leave(self.anAccount);
+        expect(self.aRoom.accounts).not.toContain(self.anAccount);
     });
 
     it("send an event when full", function () {
         var spy = this.spy();
         self.aRoom.on('full', spy);
 
-        self.aRoom.join(self.aPlayer);
-        self.aRoom.join(self.anotherPlayer);
-        self.aRoom.join(self.yetAnotherPlayer);
+        self.aRoom.join(self.anAccount);
+        self.aRoom.join(self.anotherAccount);
+        self.aRoom.join(self.yetAnotherAcount);
 
         expect(spy).toHaveBeenCalled();
     });
 
     it("creates a game with players when full", function () {
-        self.aRoom.join(self.aPlayer);
-        self.aRoom.join(self.anotherPlayer);
-        self.aRoom.join(self.yetAnotherPlayer);
+        self.aRoom.join(self.anAccount);
+        self.aRoom.join(self.anotherAccount);
+        self.aRoom.join(self.yetAnotherAcount);
 
+        var expectedPlayers = [
+            self.anAccount.players[0],
+            self.anotherAccount.players[0],
+            self.yetAnotherAcount.players[0]
+        ];
         expect(self.aRoom.game.players).toBeArray();
         expect(self.aRoom.game.players.length).toBe(3);
-        expect(self.aRoom.game.players).toContain(self.aPlayer);
-        expect(self.aRoom.game.players).toContain(self.anotherPlayer);
-        expect(self.aRoom.game.players).toContain(self.yetAnotherPlayer);
+        self.aRoom.game.players.map(function (player) {
+            expect(expectedPlayers).toContain(player);
+        });
     });
 
-    it("won't let players join when full", function () {
-        self.aRoom.join(self.aPlayer);
-        self.aRoom.join(self.anotherPlayer);
-        self.aRoom.join(self.yetAnotherPlayer);
+    it("won't let accounts join when full", function () {
+        self.aRoom.join(self.anAccount);
+        self.aRoom.join(self.anotherAccount);
+        self.aRoom.join(self.yetAnotherAcount);
 
-        var excessPlayer = playerFactory.create('Jill');
-        self.aRoom.join(excessPlayer);
+        var excessAccount = accountFactory.create('Jill');
+        self.aRoom.join(excessAccount);
         expect(self.aRoom.isFull).toBeTrue();
-        expect(self.aRoom.players).not.toContain(excessPlayer);
+        expect(self.aRoom.accounts).not.toContain(excessAccount);
     });
-
 });

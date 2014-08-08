@@ -4,15 +4,16 @@ var uuid = require('node-uuid');
 var EventEmitter = require('events').EventEmitter;
 
 module.exports = {
-    create: function (players) {
-        return new Room(players);
+    create: function () {
+        return new Room();
     }
 };
 
 var gameFactory = require('./game');
+var playerFactory = require('./player');
 
 var Room = function () {
-    this.players = [];
+    this.accounts = [];
     this.capacity = 3;
     this.isFull = false;
     return this;
@@ -20,10 +21,10 @@ var Room = function () {
 
 require('util').inherits(Room, EventEmitter);
 
-Room.prototype.join = function (player) {
+Room.prototype.join = function (account) {
     if (!this.isFull) {
-        this.players.push(player);
-        if (this.players.length === this.capacity) {
+        this.accounts.push(account);
+        if (this.accounts.length === this.capacity) {
             this.emit('full');
             this.startGame();
             this.isFull = true;
@@ -32,14 +33,21 @@ Room.prototype.join = function (player) {
     return this;
 };
 
-Room.prototype.leave = function (player) {
-    var index = this.players.indexOf(player);
+Room.prototype.leave = function (account) {
+    var index = this.accounts.indexOf(account);
     if (-1 < index) {
-        this.players.splice(index, 1);
+        this.accounts.splice(index, 1);
     }
     return this;
 };
 
 Room.prototype.startGame = function () {
-    this.game = gameFactory.create(this.players);
+    var players = [];
+    this.accounts.map(function (account) {
+        var player = playerFactory.create(account.name);
+        account.players.push(player);
+        players.push(player);
+    });
+
+    this.game = gameFactory.create(players);
 };
