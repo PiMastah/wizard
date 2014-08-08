@@ -12,19 +12,16 @@ var playerFactory = require('./player');
 var Room = function () {
     this.accounts = [];
     this.capacity = 3;
-    this.isFull = false;
     return this;
 };
 
 require('util').inherits(Room, EventEmitter);
 
 Room.prototype.join = function (account) {
-    if (!this.isFull) {
+    if (!this.isFull()) {
         this.accounts.push(account);
         if (this.accounts.length === this.capacity) {
             this.emit('full');
-            this.startGame();
-            this.isFull = true;
         }
     }
     return this;
@@ -39,7 +36,12 @@ Room.prototype.leave = function (account) {
 };
 
 Room.prototype.startGame = function () {
+    if (!this.isFull()) {
+        return false;
+    }
+
     var players = [];
+
     this.accounts.map(function (account) {
         var player = playerFactory.create(account.name);
         account.players.push(player);
@@ -47,4 +49,10 @@ Room.prototype.startGame = function () {
     });
 
     this.game = gameFactory.create(players);
+
+    return true;
+};
+
+Room.prototype.isFull = function () {
+    return this.capacity === this.accounts.length
 };

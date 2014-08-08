@@ -57,7 +57,7 @@ describe("A Room", function () {
 
         var excessAccount = accountFactory.create('Jill');
         self.aRoom.join(excessAccount);
-        expect(self.aRoom.isFull).toBeTrue();
+        expect(self.aRoom.isFull()).toBeTrue();
         expect(self.aRoom.accounts).not.toContain(excessAccount);
     });
 });
