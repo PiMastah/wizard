@@ -14,16 +14,20 @@ var gameFactory = require('./game');
 var Room = function () {
     this.players = [];
     this.capacity = 3;
+    this.isFull = false;
     return this;
 };
 
 require('util').inherits(Room, EventEmitter);
 
 Room.prototype.join = function (player) {
-    this.players.push(player);
-    if (this.players.length === this.capacity) {
-        this.emit('full');
-        this.game = gameFactory.create(this.players);
+    if (!this.isFull) {
+        this.players.push(player);
+        if (this.players.length === this.capacity) {
+            this.emit('full');
+            this.startGame();
+            this.isFull = true;
+        }
     }
     return this;
 };
@@ -34,4 +38,8 @@ Room.prototype.leave = function (player) {
         this.players.splice(index, 1);
     }
     return this;
+};
+
+Room.prototype.startGame = function () {
+    this.game = gameFactory.create(this.players);
 };

@@ -47,4 +47,16 @@ describe("A Room", function () {
         expect(self.aRoom.game.players).toContain(self.anotherPlayer);
         expect(self.aRoom.game.players).toContain(self.yetAnotherPlayer);
     });
+
+    it("won't let players join when full", function () {
+        self.aRoom.join(self.aPlayer);
+        self.aRoom.join(self.anotherPlayer);
+        self.aRoom.join(self.yetAnotherPlayer);
+
+        var excessPlayer = playerFactory.create('Jill');
+        self.aRoom.join(excessPlayer);
+        expect(self.aRoom.isFull).toBeTrue();
+        expect(self.aRoom.players).not.toContain(excessPlayer);
+    });
+
 });
