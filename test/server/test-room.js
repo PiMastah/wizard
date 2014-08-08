@@ -74,4 +74,15 @@ describe("A Room", function () {
         expect(self.aRoom.isFull()).toBeTrue();
         expect(self.aRoom.accounts).not.toContain(excessAccount);
     });
+
+    it("is not full when a player leaves", function () {
+        self.aRoom.join(self.anAccount);
+        self.aRoom.join(self.anotherAccount);
+        self.aRoom.join(self.yetAnotherAcount);
+
+        self.aRoom.leave(self.yetAnotherAcount);
+
+        expect(self.aRoom.isFull()).not.toBeTrue();
+        expect(self.aRoom.accounts).not.toContain(self.yetAnotherAcount);
+    });
 });
