@@ -22,7 +22,7 @@ describe("A Room", function () {
         expect(self.aRoom.accounts).not.toContain(self.anAccount);
     });
 
-    it("send an event when full", function () {
+    it("sends an event when full", function () {
         var spy = this.spy();
         self.aRoom.on('full', spy);
 
