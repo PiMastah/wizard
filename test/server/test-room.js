@@ -33,21 +33,32 @@ describe("A Room", function () {
         expect(spy).toHaveBeenCalled();
     });
 
-    it("creates a game with players when full", function () {
+    it("creates a game with players", function () {
         self.aRoom.join(self.anAccount);
         self.aRoom.join(self.anotherAccount);
         self.aRoom.join(self.yetAnotherAcount);
+
+        self.aRoom.startGame();
 
         var expectedPlayers = [
             self.anAccount.players[0],
             self.anotherAccount.players[0],
             self.yetAnotherAcount.players[0]
         ];
+
         expect(self.aRoom.game.players).toBeArray();
         expect(self.aRoom.game.players.length).toBe(3);
         self.aRoom.game.players.map(function (player) {
             expect(expectedPlayers).toContain(player);
         });
+    });
+
+    it("does not create a game when not full", function () {
+        self.aRoom.join(self.anAccount);
+
+        self.aRoom.startGame();
+
+        expect(self.aRoom.game).not.toBeDefined();
     });
 
     it("won't let accounts join when full", function () {
