@@ -48,6 +48,7 @@ Room.prototype.startGame = function () {
 
     this.accounts.map(function (account) {
         var player = playerFactory.create(account.name);
+        account.setPlayerForRoom(self, player);
         players.push(player);
     });
 

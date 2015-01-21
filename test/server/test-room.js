@@ -36,7 +36,7 @@ describe("A Room", function () {
 
     it("creates a game with players", function () {
         self.accounts.map(function (account) {
-            self.aRoom.join(account);
+            account.joinRoom(self.aRoom);
         });
         var hasStarted = self.aRoom.startGame();
 
@@ -44,6 +44,11 @@ describe("A Room", function () {
         expect(self.aRoom.game).toBeDefined();
         expect(self.aRoom.game.players).toBeArray();
         expect(self.aRoom.game.players.length).toBe(3);
+
+        self.accounts.map(function (account) {
+            var player = account.games[self.aRoom.id];
+            expect(player).toBeDefined();
+        });
     });
 
     it("does not create a game when not full", function () {
