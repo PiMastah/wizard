@@ -8,7 +8,6 @@ var Account = function (name) {
     this.name = name;
     this.rooms = [];
     this.games = {};
-    this.lobby = {};
 };
 
 Account.prototype.joinRoom = function (room) {

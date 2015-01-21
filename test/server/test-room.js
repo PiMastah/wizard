@@ -27,9 +27,9 @@ describe("A Room", function () {
         var spy = this.spy();
         self.aRoom.on('full', spy);
 
-        self.aRoom.join(self.anAccount);
-        self.aRoom.join(self.anotherAccount);
-        self.aRoom.join(self.yetAnotherAcount);
+        self.accounts.map(function (account) {
+            account.joinRoom(self.aRoom);
+        });
 
         expect(spy).toHaveBeenCalled();
     });

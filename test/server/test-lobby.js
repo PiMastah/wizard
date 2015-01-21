@@ -5,7 +5,6 @@ buster.spec.expose();
 
 var accountFactory = require('../../src/server/account');
 var lobbyFactory = require('../../src/server/lobby');
-var roomFactory = require('../../src/server/room');
 
 describe("A lobby", function () {
     var self = this;
