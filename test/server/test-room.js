@@ -12,6 +12,7 @@ describe("A Room", function () {
         self.anAccount = accountFactory.create('Jim');
         self.anotherAccount = accountFactory.create('John');
         self.yetAnotherAcount = accountFactory.create('Jack');
+        self.accounts = [self.anAccount, self.anotherAccount, self.yetAnotherAcount];
         self.aRoom = roomFactory.create();
     });
 
@@ -34,25 +35,15 @@ describe("A Room", function () {
     });
 
     it("creates a game with players", function () {
-        self.aRoom.join(self.anAccount);
-        self.aRoom.join(self.anotherAccount);
-        self.aRoom.join(self.yetAnotherAcount);
-
+        self.accounts.map(function (account) {
+            self.aRoom.join(account);
+        });
         var hasStarted = self.aRoom.startGame();
-
-        var expectedPlayers = [
-            self.anAccount.players[0],
-            self.anotherAccount.players[0],
-            self.yetAnotherAcount.players[0]
-        ];
 
         expect(hasStarted).toBeTrue();
         expect(self.aRoom.game).toBeDefined();
         expect(self.aRoom.game.players).toBeArray();
         expect(self.aRoom.game.players.length).toBe(3);
-        self.aRoom.game.players.map(function (player) {
-            expect(expectedPlayers).toContain(player);
-        });
     });
 
     it("does not create a game when not full", function () {

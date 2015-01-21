@@ -6,7 +6,6 @@ module.exports = {
 
 var Account = function (name) {
     this.name = name;
-    this.players = [];
     this.rooms = [];
     this.games = {};
 };
