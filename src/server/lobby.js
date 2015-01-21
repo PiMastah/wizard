@@ -15,7 +15,7 @@ var Lobby = function () {
 
 Lobby.prototype.join = function (account) {
     this.accounts.push(account);
-
+    account.lobby = this;
 
     return this;
 };
@@ -24,6 +24,7 @@ Lobby.prototype.leave = function (account) {
     var i = this.accounts.indexOf(account);
     if (-1 < i) {
         this.accounts.splice(i, 1);
+        account.lobby = undefined;
     }
     return this;
 };

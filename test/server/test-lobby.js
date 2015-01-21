@@ -17,8 +17,10 @@ describe("A lobby", function () {
     it("allows accounts to join and leave", function () {
         self.aLobby.join(self.anAccount);
         expect(self.aLobby.accounts).toContain(self.anAccount);
+        expect(self.anAccount.lobby).toBe(self.aLobby);
         self.aLobby.leave(self.anAccount);
         expect(self.aLobby.accounts).not.toContain(self.anAccount);
+        expect(self.anAccount.lobby).not.toBeDefined();
     });
 
     it("has at least one room that is not full", function () {
