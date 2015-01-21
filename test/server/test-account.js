@@ -5,6 +5,7 @@ buster.spec.expose();
 
 var accountFactory = require('../../src/server/account');
 var roomFactory = require('../../src/server/room');
+var playerFactory = require('../../src/server/player');
 
 describe("An account", function () {
     var self = this;
@@ -20,7 +21,14 @@ describe("An account", function () {
         })).toBeTrue();
     });
 
-/*    it("can associate a player with a room", function () {
+    it("can associate a player with a room", function () {
+        var player = playerFactory.create('Foo');
+        self.anAccount.joinRoom(self.aRoom);
+        self.anAccount.setPlayerForRoom(self.aRoom, player);
 
-    });*/
+        expect(self.anAccount.rooms.some(function (room) {
+            return self.aRoom === room;
+        })).toBeFalse();
+        expect(self.anAccount.games[self.aRoom.id]).toBe(player);
+    });
 });
