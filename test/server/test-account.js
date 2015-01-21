@@ -19,6 +19,8 @@ describe("An account", function () {
         expect(self.anAccount.rooms.some(function (room) {
             return self.aRoom === room;
         })).toBeTrue();
+
+        expect(self.aRoom.accounts.indexOf(self.anAccount)).toBeGreaterThan(-1);
     });
 
     it("can associate a player with a room", function () {

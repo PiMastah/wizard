@@ -12,6 +12,7 @@ var Account = function (name) {
 
 Account.prototype.joinRoom = function (room) {
     this.rooms.push(room);
+    room.join(this);
 };
 
 Account.prototype.setPlayerForRoom = function (room, player) {
