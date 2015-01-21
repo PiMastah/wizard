@@ -7,4 +7,9 @@ module.exports = {
 var Account = function (name) {
     this.name = name;
     this.players = [];
+    this.rooms = [];
+};
+
+Account.prototype.joinRoom = function (room) {
+    this.rooms.push(room);
 };
