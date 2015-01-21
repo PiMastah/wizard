@@ -32,4 +32,11 @@ describe("A lobby", function () {
         self.aLobby.openRoom();
         expect(roomsBefore).toEqual(self.aLobby.rooms.length - 1);
     });
+
+    it("can associate a room with its id", function () {
+        var expectedRoom = self.aLobby.rooms[0];
+        var room = self.aLobby.getRoomById(expectedRoom.id);
+
+        expect(room).toBe(expectedRoom);
+    })
 });

@@ -39,3 +39,11 @@ Lobby.prototype.openRoom = function () {
 
     return this;
 };
+
+Lobby.prototype.getRoomById = function (roomId) {
+    return this.rooms.filter(function (room) {
+         if (room.id === roomId) {
+             return room;
+         }
+    }).pop();
+};
