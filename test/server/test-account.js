@@ -16,9 +16,7 @@ describe("An account", function () {
 
     it("can join a room", function () {
         self.anAccount.joinRoom(self.aRoom);
-        expect(self.anAccount.rooms.some(function (room) {
-            return self.aRoom === room;
-        })).toBeTrue();
+        expect(self.anAccount.rooms.indexOf(self.aRoom)).toBeGreaterThan(-1);
 
         expect(self.aRoom.accounts.indexOf(self.anAccount)).toBeGreaterThan(-1);
     });
@@ -28,9 +26,7 @@ describe("An account", function () {
         self.anAccount.joinRoom(self.aRoom);
         self.anAccount.setPlayerForRoom(self.aRoom, player);
 
-        expect(self.anAccount.rooms.some(function (room) {
-            return self.aRoom === room;
-        })).toBeFalse();
+        expect(self.anAccount.rooms.indexOf(self.aRoom)).toEqual(-1);
         expect(self.anAccount.games[self.aRoom.id]).toBe(player);
     });
 });

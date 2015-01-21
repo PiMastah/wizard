@@ -61,9 +61,9 @@ describe("A Room", function () {
     });
 
     it("won't let accounts join when full", function () {
-        self.aRoom.join(self.anAccount);
-        self.aRoom.join(self.anotherAccount);
-        self.aRoom.join(self.yetAnotherAcount);
+        self.accounts.map(function (account) {
+            account.joinRoom(self.aRoom)
+        });
 
         var excessAccount = accountFactory.create('Jill');
         self.aRoom.join(excessAccount);
@@ -72,9 +72,9 @@ describe("A Room", function () {
     });
 
     it("is not full when a player leaves", function () {
-        self.aRoom.join(self.anAccount);
-        self.aRoom.join(self.anotherAccount);
-        self.aRoom.join(self.yetAnotherAcount);
+        self.accounts.map(function (account) {
+            account.joinRoom(self.aRoom);
+        });
 
         self.aRoom.leave(self.yetAnotherAcount);
 
