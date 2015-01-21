@@ -26,4 +26,10 @@ describe("A lobby", function () {
         expect(self.aLobby.rooms.length).toBeGreaterThan(0);
         expect(self.aLobby.hasOpenRooms()).toBeTrue();
     });
+
+    it("can open a new room", function () {
+        var roomsBefore = self.aLobby.rooms.length;
+        self.aLobby.openRoom();
+        expect(roomsBefore).toEqual(self.aLobby.rooms.length - 1);
+    });
 });

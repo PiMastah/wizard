@@ -9,7 +9,7 @@ module.exports = {
 var Lobby = function () {
     this.accounts = [];
     this.rooms = [];
-    this.rooms.push(roomFactory.create());
+    this.openRoom();
     return this;
 };
 
@@ -32,4 +32,10 @@ Lobby.prototype.hasOpenRooms = function () {
     return this.rooms.some(function (room) {
         return (room.isFull() === false);
     });
+};
+
+Lobby.prototype.openRoom = function () {
+    this.rooms.push(roomFactory.create());
+
+    return this;
 };
